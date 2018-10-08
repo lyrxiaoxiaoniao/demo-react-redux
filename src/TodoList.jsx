@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { Input,  List } from 'antd';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { getTitle } from './store/actions';
 import TodoTitle from './components/TodoTitle';
 const Search = Input.Search;
@@ -71,9 +72,10 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
   return {
-    onGetTitle: (title) => {
-      dispatch(getTitle(title))
-    }
+    onGetTitle: bindActionCreators(getTitle ,dispatch)
+    // onGetTitle: (title) => {
+    //   dispatch(getTitle(title))
+    // }
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(TodoList);
