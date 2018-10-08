@@ -5,7 +5,6 @@ const defaultState = {
   title: 'ceshi'
 }
 const todoReducer = (state = defaultState, action) => {
-  console.log(state);
   const newState = JSON.parse(JSON.stringify(state))
   switch (action.type) {
     case actionTypes.CHANGE_TITLE:

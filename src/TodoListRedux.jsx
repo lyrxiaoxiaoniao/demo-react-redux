@@ -1,5 +1,5 @@
 import React, { Fragment, Component } from 'react';
-import { Input, List, Button } from 'antd';
+import { Input, List, Button, message } from 'antd';
 import { connect } from 'react-redux';
 import TodoTitle from './components/TodoTitle';
 import * as actionTypes from './store/actionTypes';
@@ -18,7 +18,11 @@ const mapDispatchToProps = (dispatch) => {
       const value = e.target.value;
       dispatch({ type: actionTypes.CHANGE_INPUTVALUE, inputValue: value });
     },
-    onBtnClick: () => {
+    onBtnClick: value => {
+      if (!value) {
+        message.error('不能为空！');
+        return
+      }
       dispatch({ type: actionTypes.HANDLE_BTN_CLICK });
     },
     onItemDelete: index => {
@@ -44,7 +48,7 @@ class TodoList extends Component {
             className="top"
             placeholder="todolist"
           />
-          <Button onClick={onBtnClick}>提交</Button>
+          <Button onClick={() => onBtnClick(inputValue)}>提交</Button>
           <List
             className="toplist"
             bordered
